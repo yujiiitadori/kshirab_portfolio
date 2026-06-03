@@ -77,8 +77,14 @@
   </div>
 
   <script>
-    // Simple fix: use the correct PDF filename
-    const pdfFile = "kshirab_portfolio.pdf"; // Changed to match your file path
+    // Your PDF file name
+    const pdfFile = "kshirab_portfolio.pdf";
+    
+    // Get full URL to the PDF
+    const pdfUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + pdfFile;
+    
+    // Use Google Docs Viewer - this handles large files!
+    const viewerUrl = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";
     
     const viewBtn = document.getElementById("viewBtn");
     const downloadBtn = document.getElementById("downloadBtn");
@@ -90,9 +96,9 @@
     downloadBtn.href = pdfFile;
     downloadBtn.setAttribute("download", "");
     
-    // View button - open PDF in modal
+    // View button - use Google Docs viewer
     viewBtn.addEventListener("click", () => {
-      pdfFrame.src = pdfFile;
+      pdfFrame.src = viewerUrl;
       pdfModal.classList.remove("hidden");
     });
     
