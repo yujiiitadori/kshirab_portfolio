@@ -23,6 +23,7 @@
       border: 4px solid black;
       box-shadow: 4px 4px 0px black;
       transition: all 0.15s ease;
+      cursor: pointer;
     }
 
     .btn-pixel:hover {
@@ -59,7 +60,7 @@
           <button id="viewBtn" class="btn-pixel bg-[#d9d9d9] px-8 md:px-12 py-4 md:py-5 text-black text-lg md:text-2xl font-bold" style="font-family: 'Pixelify Sans', sans-serif;">
             VIEW
           </button>
-          <a href="kshirabdija_portfoliofin.pdf" download class="btn-pixel bg-[#d9d9d9] px-8 md:px-12 py-4 md:py-5 text-black text-lg md:text-2xl font-bold inline-flex items-center justify-center" style="font-family: 'Pixelify Sans', sans-serif;">
+          <a id="downloadBtn" class="btn-pixel bg-[#d9d9d9] px-8 md:px-12 py-4 md:py-5 text-black text-lg md:text-2xl font-bold inline-flex items-center justify-center" style="font-family: 'Pixelify Sans', sans-serif;">
             DOWNLOAD
           </a>
         </div>
@@ -67,38 +68,42 @@
     </div>
   </div>
 
-  <!-- PDF MODAL - FIXED: Using Google Docs Viewer -->
+  <!-- PDF MODAL -->
   <div id="pdfModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
     <div class="bg-white w-full md:w-[90%] h-[90%] rounded-xl overflow-hidden relative">
-      <button id="closeBtn" class="absolute top-4 right-4 bg-black text-white px-5 py-2 z-50">Close</button>
-      <!-- CHANGED: Using Google Docs Viewer instead of direct iframe -->
+      <button id="closeBtn" class="absolute top-4 right-4 bg-black text-white px-5 py-2 z-50 rounded">Close</button>
       <iframe id="pdfFrame" class="w-full h-full" src=""></iframe>
     </div>
   </div>
 
   <script>
+    // Simple fix: use the correct PDF filename
+    const pdfFile = "kshirab_portfolio.pdf"; // Changed to match your file path
+    
     const viewBtn = document.getElementById("viewBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
     const pdfModal = document.getElementById("pdfModal");
     const closeBtn = document.getElementById("closeBtn");
     const pdfFrame = document.getElementById("pdfFrame");
     
-    // Get the full URL of the PDF
-    const pdfUrl = window.location.href.replace(/\/[^/]*$/, '/') + 'kshirabdija_portfoliofin.pdf';
+    // Set download link
+    downloadBtn.href = pdfFile;
+    downloadBtn.setAttribute("download", "");
     
-    // Use Google Docs Viewer (this fixes the issue)
-    const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
-
+    // View button - open PDF in modal
     viewBtn.addEventListener("click", () => {
-      pdfFrame.src = viewerUrl;  // Load PDF through Google Viewer
+      pdfFrame.src = pdfFile;
       pdfModal.classList.remove("hidden");
     });
-
+    
+    // Close modal
     closeBtn.addEventListener("click", () => {
       pdfModal.classList.add("hidden");
-      pdfFrame.src = "";  // Stop loading when closed
+      pdfFrame.src = "";
     });
-
-    window.addEventListener("click", (e) => {
+    
+    // Close on backdrop click
+    pdfModal.addEventListener("click", (e) => {
       if (e.target === pdfModal) {
         pdfModal.classList.add("hidden");
         pdfFrame.src = "";
