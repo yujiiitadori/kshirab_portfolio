@@ -30,6 +30,68 @@
       transform: translate(2px, 2px);
       box-shadow: 2px 2px 0px black;
     }
+
+    /* PDF viewer styles */
+    .pdf-viewer-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pdf-viewer-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .pdf-error {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      color: #666;
+    }
+
+    .pdf-error.show {
+      display: block;
+    }
+
+    .pdf-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #f0f0f0;
+      border-bottom: 1px solid #ddd;
+      flex-shrink: 0;
+    }
+
+    .pdf-toolbar button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .pdf-toolbar button:hover {
+      background: #555;
+    }
+
+    .pdf-toolbar .viewer-options {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pdf-toolbar .viewer-options select {
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 
@@ -68,56 +130,223 @@
     </div>
   </div>
 
-  <!-- PDF MODAL - NOW MUCH BIGGER! -->
+  <!-- PDF MODAL -->
   <div id="pdfModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-1 md:p-2">
-    <div class="bg-white w-full h-full rounded-lg overflow-hidden relative">
-      <button id="closeBtn" class="absolute top-3 right-3 bg-black text-white px-5 py-2 z-50 rounded font-bold hover:bg-red-700 transition">✕ CLOSE</button>
-      <iframe id="pdfFrame" class="w-full h-full" src=""></iframe>
+    <div class="bg-white w-full h-full rounded-lg overflow-hidden relative flex flex-col">
+      <!-- Toolbar -->
+      <div class="pdf-toolbar flex-shrink-0">
+        <span class="font-semibold text-sm">📄 Portfolio Preview</span>
+        <div class="viewer-options">
+          <select id="viewerSelect" class="text-sm">
+            <option value="google">Google Docs Viewer</option>
+            <option value="mozilla">Mozilla PDF.js</option>
+            <option value="native">Native PDF (Chrome/Edge)</option>
+            <option value="raw">Raw PDF</option>
+          </select>
+          <button id="closeBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded font-bold text-sm transition">✕ CLOSE</button>
+        </div>
+      </div>
+
+      <!-- PDF Viewer Area -->
+      <div class="flex-1 relative overflow-hidden">
+        <div id="pdfContainer" class="w-full h-full">
+          <iframe id="pdfFrame" class="w-full h-full" src=""></iframe>
+        </div>
+        
+        <!-- Error Message -->
+        <div id="pdfError" class="pdf-error absolute inset-0 flex items-center justify-center bg-white">
+          <div>
+            <p class="text-xl font-bold text-red-600 mb-4">⚠️ Could not load PDF</p>
+            <p class="text-gray-600 mb-4">Try one of these solutions:</p>
+            <ul class="text-left text-gray-700 max-w-md mx-auto space-y-2">
+              <li>• <strong>Download</strong> the PDF and open it directly</li>
+              <li>• <strong>Refresh</strong> the page and try again</li>
+              <li>• Try a different <strong>viewer option</strong> from the dropdown</li>
+            </ul>
+            <button id="retryBtn" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+              🔄 Retry
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white">
+          <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mb-4"></div>
+            <p class="text-gray-600">Loading PDF...</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Your PDF file name
+    // PDF file path
     const pdfFile = "kshirabdija_portfolio (1)-compressed.pdf";
-    
-    // Get full URL to the PDF
     const pdfUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + pdfFile;
-    
-    // Use Google Docs Viewer - this handles large files!
-    const viewerUrl = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";
-    
+
+    // DOM elements
     const viewBtn = document.getElementById("viewBtn");
     const downloadBtn = document.getElementById("downloadBtn");
     const pdfModal = document.getElementById("pdfModal");
     const closeBtn = document.getElementById("closeBtn");
     const pdfFrame = document.getElementById("pdfFrame");
-    
+    const viewerSelect = document.getElementById("viewerSelect");
+    const pdfError = document.getElementById("pdfError");
+    const pdfLoading = document.getElementById("pdfLoading");
+    const retryBtn = document.getElementById("retryBtn");
+
     // Set download link
     downloadBtn.href = pdfFile;
     downloadBtn.setAttribute("download", "");
-    
-    // View button - use Google Docs viewer
-    viewBtn.addEventListener("click", () => {
+
+    // Build viewer URL based on selected option
+    function getViewerUrl(option) {
+      const encodedUrl = encodeURIComponent(pdfUrl);
+      switch(option) {
+        case 'google':
+          return `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
+        case 'mozilla':
+          return `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodedUrl}`;
+        case 'native':
+          return pdfUrl;
+        case 'raw':
+          return pdfUrl;
+        default:
+          return `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
+      }
+    }
+
+    // Show/hide loading and error states
+    function setLoading(show) {
+      pdfLoading.style.display = show ? 'flex' : 'none';
+    }
+
+    function setError(show) {
+      pdfError.classList.toggle('show', show);
+    }
+
+    // Load the PDF
+    function loadPdf() {
+      const option = viewerSelect.value;
+      const viewerUrl = getViewerUrl(option);
+      
+      setLoading(true);
+      setError(false);
+      
       pdfFrame.src = viewerUrl;
+    }
+
+    // Open modal
+    function openModal() {
       pdfModal.classList.remove("hidden");
-      document.body.style.overflow = "hidden"; // Prevent scrolling behind modal
-    });
-    
+      document.body.style.overflow = "hidden";
+      
+      // Load the PDF
+      setTimeout(loadPdf, 300);
+    }
+
     // Close modal
-    closeBtn.addEventListener("click", () => {
+    function closeModal() {
       pdfModal.classList.add("hidden");
       pdfFrame.src = "";
       document.body.style.overflow = "";
+      setLoading(false);
+      setError(false);
+    }
+
+    // Handle iframe load error
+    pdfFrame.addEventListener('error', function() {
+      setLoading(false);
+      setError(true);
     });
-    
+
+    // Try to detect if PDF loaded successfully
+    pdfFrame.addEventListener('load', function() {
+      setLoading(false);
+      // For Google Docs viewer, if it fails it shows an error page
+      // We'll check after a delay if it loaded
+      setTimeout(() => {
+        try {
+          // If it's Google Docs and it loaded properly, the iframe content will be accessible
+          // If not, it might throw a cross-origin error
+          if (viewerSelect.value === 'google') {
+            // Google Docs loads successfully if we can access the frame
+            // If we can't access it (cross-origin), it means the viewer loaded but can't be accessed
+            // which is actually fine - the content is visible
+            setError(false);
+          }
+        } catch(e) {
+          // Cross-origin means the viewer loaded successfully (it's from a different domain)
+          setError(false);
+        }
+      }, 3000);
+    });
+
+    // Handle iframe load failure with timeout
+    let loadTimeout;
+    pdfFrame.addEventListener('loadstart', function() {
+      clearTimeout(loadTimeout);
+      loadTimeout = setTimeout(() => {
+        setLoading(false);
+        // Check if we can detect content
+        try {
+          const doc = pdfFrame.contentDocument || pdfFrame.contentWindow.document;
+          if (doc && doc.body && doc.body.innerHTML && doc.body.innerHTML.length > 100) {
+            setError(false);
+          } else {
+            setError(true);
+          }
+        } catch(e) {
+          // Cross-origin means content loaded
+          setError(false);
+        }
+      }, 8000);
+    });
+
+    // View button
+    viewBtn.addEventListener("click", openModal);
+
+    // Close button
+    closeBtn.addEventListener("click", closeModal);
+
     // Close on backdrop click
     pdfModal.addEventListener("click", (e) => {
       if (e.target === pdfModal) {
-        pdfModal.classList.add("hidden");
-        pdfFrame.src = "";
-        document.body.style.overflow = "";
+        closeModal();
       }
     });
+
+    // Retry button
+    retryBtn.addEventListener("click", loadPdf);
+
+    // Viewer selection change
+    viewerSelect.addEventListener("change", function() {
+      if (!pdfModal.classList.contains("hidden")) {
+        loadPdf();
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !pdfModal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+
+    // Check if PDF exists
+    async function checkPdfExists() {
+      try {
+        const response = await fetch(pdfUrl, { method: 'HEAD' });
+        if (!response.ok) {
+          console.warn('PDF file may not exist at:', pdfUrl);
+        }
+      } catch(e) {
+        console.warn('Could not verify PDF existence:', e);
+      }
+    }
+    checkPdfExists();
+
   </script>
 
 </body>
