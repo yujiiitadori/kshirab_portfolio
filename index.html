@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio</title>
+
+  <title>Kshirabdija Sahoo — Portfolio</title>
 
   <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- PIXELIFY FONT -->
+  <!-- PIXELIFY SANS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     body {
@@ -23,7 +28,6 @@
       border: 4px solid black;
       box-shadow: 4px 4px 0px black;
       transition: all 0.15s ease;
-      cursor: pointer;
     }
 
     .btn-pixel:hover {
@@ -31,316 +35,482 @@
       box-shadow: 2px 2px 0px black;
     }
 
-    /* PDF viewer styles */
-    .pdf-viewer-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+    .btn-pixel:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px black;
     }
 
-    .pdf-viewer-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .pdf-error {
-      display: none;
-      padding: 40px;
-      text-align: center;
-      color: #666;
-    }
-
-    .pdf-error.show {
-      display: block;
-    }
-
-    .pdf-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background: #f0f0f0;
-      border-bottom: 1px solid #ddd;
-      flex-shrink: 0;
-    }
-
-    .pdf-toolbar button {
-      background: #333;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-
-    .pdf-toolbar button:hover {
-      background: #555;
-    }
-
-    .pdf-toolbar .viewer-options {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .pdf-toolbar .viewer-options select {
-      padding: 6px 12px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+    /* PDF MODAL */
+    #pdfModal {
+      backdrop-filter: blur(4px);
     }
   </style>
 </head>
 
+
 <body class="bg-[#e5e5e5]">
+
+  <!-- ========================================= -->
+  <!-- MAIN PAGE -->
+  <!-- ========================================= -->
 
   <div class="w-screen min-h-screen flex flex-col md:flex-row overflow-hidden">
 
+
+    <!-- ========================================= -->
     <!-- LEFT SIDE -->
-    <div class="w-full md:w-1/2 bg-[#e5e5e5] relative overflow-hidden flex flex-col items-center min-h-[72vh] md:min-h-screen pt-6 md:pt-4 px-4 md:px-0">
-      <h1 class="relative z-30 text-[13vw] md:text-[6vw] font-black leading-none self-start ml-2 md:ml-8 mt-2 md:mt-5">
+    <!-- ========================================= -->
+
+    <div
+      class="
+        w-full
+        md:w-1/2
+        bg-[#e5e5e5]
+        relative
+        overflow-hidden
+        flex
+        flex-col
+        items-center
+        min-h-[72vh]
+        md:min-h-screen
+        pt-6
+        md:pt-4
+        px-4
+        md:px-0
+      "
+    >
+
+      <!-- TITLE -->
+
+      <h1
+        class="
+          relative
+          z-30
+          text-[13vw]
+          md:text-[6vw]
+          font-black
+          leading-none
+          self-start
+          ml-2
+          md:ml-8
+          mt-2
+          md:mt-5
+        "
+      >
         print("hello")
       </h1>
-      <img src="Frame 193.png" alt="portfolio image" class="relative md:absolute md:bottom-0 md:left-[-2%] z-10 w-[112%] md:w-[100%] max-w-none object-contain mt-6 md:mt-0 mr-2 md:mr-10" />
-    </div>
 
+
+      <!-- IMAGE -->
+
+      <img
+  src="Frame 193.png"
+  alt="Kshirabdija Sahoo portfolio"
+  class="
+    relative
+    md:absolute
+    md:bottom-0
+    md:left-[-2%]
+    z-10
+    w-[112%]
+    md:w-[108%]
+    max-w-none
+    object-contain
+    mt-6
+    md:mt-0
+    mr-2
+    md:mr-10
+  "
+/>
+
+
+
+    <!-- ========================================= -->
     <!-- RIGHT SIDE -->
-    <div class="w-full md:w-1/2 bg-[#ea63f6] relative overflow-hidden min-h-[45vh] md:min-h-screen">
-      <div class="relative z-20 h-full flex flex-col justify-center px-8 md:px-20 py-16 md:py-0">
-        <h2 class="text-white text-2xl md:text-4xl mb-8 md:mb-12 font-bold" style="font-family: 'Pixelify Sans', sans-serif;">
+    <!-- ========================================= -->
+
+    <div
+      class="
+        w-full
+        md:w-1/2
+        bg-[#ea63f6]
+        relative
+        overflow-hidden
+        min-h-[45vh]
+        md:min-h-screen
+      "
+    >
+
+
+      <!-- ========================================= -->
+      <!-- DECORATIVE DOTS -->
+      <!-- ========================================= -->
+
+      <div class="absolute inset-0 z-0 hidden md:block">
+
+        <div
+          class="
+            absolute
+            top-8
+            left-10
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            top-16
+            right-24
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            top-8
+            right-8
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            top-64
+            right-10
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            bottom-52
+            right-12
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            bottom-24
+            right-20
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+        <div
+          class="
+            absolute
+            bottom-10
+            left-20
+            w-5
+            h-5
+            bg-black
+            rounded-full
+          "
+        ></div>
+
+      </div>
+
+
+
+      <!-- ========================================= -->
+      <!-- CONTENT -->
+      <!-- ========================================= -->
+
+      <div
+        class="
+          relative
+          z-20
+          h-full
+          flex
+          flex-col
+          justify-center
+          px-8
+          md:px-20
+          py-16
+          md:py-0
+        "
+      >
+
+
+        <!-- PIXELIFY HEADING -->
+
+        <h2
+          class="
+            text-white
+            text-2xl
+            md:text-4xl
+            mb-8
+            md:mb-12
+            font-bold
+          "
+          style="font-family: 'Pixelify Sans', sans-serif;"
+        >
           Erm so this is awkward
         </h2>
-        <div class="text-black text-[1.3rem] md:text-[1.8rem] leading-snug max-w-3xl">
-          <p>This website is currently under construction (good things take a second).</p>
-          <p class="mt-8 md:mt-12">Until then, here's a PDF version of my portfolio filled with projects, experiments, research, and visual explorations.</p>
-          <p class="mt-8 md:mt-12">Full website coming soon :)</p>
+
+
+
+        <!-- DESCRIPTION -->
+
+        <div
+          class="
+            text-black
+            text-[1.3rem]
+            md:text-[1.8rem]
+            leading-snug
+            max-w-3xl
+          "
+        >
+
+          <p>
+            This website is currently under construction
+            (good things take a second).
+          </p>
+
+
+          <p class="mt-8 md:mt-12">
+            Until then, here’s a PDF version of my portfolio
+            filled with projects, experiments, research,
+            and visual explorations.
+          </p>
+
+
+          <p class="mt-8 md:mt-12">
+            Full website coming soon :)
+          </p>
+
         </div>
-        <div class="flex flex-wrap gap-6 md:gap-10 mt-10 md:mt-14">
-          <button id="viewBtn" class="btn-pixel bg-[#d9d9d9] px-8 md:px-12 py-4 md:py-5 text-black text-lg md:text-2xl font-bold" style="font-family: 'Pixelify Sans', sans-serif;">
+
+
+
+        <!-- ========================================= -->
+        <!-- BUTTONS -->
+        <!-- ========================================= -->
+
+        <div
+          class="
+            flex
+            flex-wrap
+            gap-6
+            md:gap-10
+            mt-10
+            md:mt-14
+          "
+        >
+
+
+          <!-- VIEW BUTTON -->
+
+          <button
+            id="viewBtn"
+            class="
+              btn-pixel
+              bg-[#d9d9d9]
+              px-8
+              md:px-12
+              py-4
+              md:py-5
+              text-black
+              text-lg
+              md:text-2xl
+              font-bold
+            "
+            style="font-family: 'Pixelify Sans', sans-serif;"
+          >
             VIEW
           </button>
-          <a id="downloadBtn" class="btn-pixel bg-[#d9d9d9] px-8 md:px-12 py-4 md:py-5 text-black text-lg md:text-2xl font-bold inline-flex items-center justify-center" style="font-family: 'Pixelify Sans', sans-serif;">
+
+
+
+          <!-- DOWNLOAD BUTTON -->
+
+          <a
+            href="kshirabdija_portfolio%20%281%29-compressed.pdf"
+            download
+            class="
+              btn-pixel
+              bg-[#d9d9d9]
+              px-8
+              md:px-12
+              py-4
+              md:py-5
+              text-black
+              text-lg
+              md:text-2xl
+              font-bold
+              inline-flex
+              items-center
+              justify-center
+            "
+            style="font-family: 'Pixelify Sans', sans-serif;"
+          >
             DOWNLOAD
           </a>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
 
-  <!-- PDF MODAL -->
-  <div id="pdfModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-1 md:p-2">
-    <div class="bg-white w-full h-full rounded-lg overflow-hidden relative flex flex-col">
-      <!-- Toolbar -->
-      <div class="pdf-toolbar flex-shrink-0">
-        <span class="font-semibold text-sm">Portfolio Preview</span>
-        <div class="viewer-options">
-          <select id="viewerSelect" class="text-sm">
-            <option value="google">Google Docs Viewer</option>
-            <option value="raw">Raw PDF</option>
-          </select>
-          <button id="closeBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded font-bold text-sm transition">✕ CLOSE</button>
-        </div>
-      </div>
 
-      <!-- PDF Viewer Area -->
-      <div class="flex-1 relative overflow-hidden">
-        <div id="pdfContainer" class="w-full h-full">
-          <iframe id="pdfFrame" class="w-full h-full" src=""></iframe>
-        </div>
-        
-        <!-- Error Message -->
-        <div id="pdfError" class="pdf-error absolute inset-0 flex items-center justify-center bg-white">
-          <div>
-            <p class="text-xl font-bold text-red-600 mb-4">⚠️ Could not load PDF</p>
-            <p class="text-gray-600 mb-4">Try one of these solutions:</p>
-            <ul class="text-left text-gray-700 max-w-md mx-auto space-y-2">
-              <li>• <strong>Download</strong> the PDF and open it directly</li>
-              <li>• <strong>Refresh</strong> the page and try again</li>
-              <li>• Try a different <strong>viewer option</strong> from the dropdown</li>
-            </ul>
-            <button id="retryBtn" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-              Retry
-            </button>
-          </div>
-        </div>
 
-        <!-- Loading Spinner -->
-        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white">
-          <div class="text-center">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-e5e5e5 mb-4"></div>
-            <p class="text-gray-600">Loading PDF...</p>
-          </div>
-        </div>
-      </div>
+  <!-- ========================================= -->
+  <!-- PDF VIEWER POPUP -->
+  <!-- ========================================= -->
+
+  <div
+    id="pdfModal"
+    class="
+      hidden
+      fixed
+      inset-0
+      bg-black/70
+      z-50
+      flex
+      items-center
+      justify-center
+      p-4
+    "
+  >
+
+    <div
+      class="
+        bg-white
+        w-full
+        md:w-[90%]
+        h-[90%]
+        relative
+        overflow-hidden
+        shadow-2xl
+      "
+    >
+
+
+      <!-- CLOSE BUTTON -->
+
+      <button
+        id="closeBtn"
+        class="
+          absolute
+          top-3
+          right-3
+          bg-black
+          text-white
+          px-5
+          py-2
+          z-50
+        "
+        style="font-family: 'Pixelify Sans', sans-serif;"
+      >
+        CLOSE
+      </button>
+
+
+
+      <!-- PDF -->
+
+      <iframe
+        src="kshirabdija_portfolio%20%281%29-compressed.pdf"
+        title="Kshirabdija Sahoo Portfolio"
+        class="w-full h-full"
+      ></iframe>
+
     </div>
+
   </div>
+
+
+
+  <!-- ========================================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ========================================= -->
 
   <script>
-    // PDF file path
-    const pdfFile = "kshirabdija_portfolio (1)-compressed.pdf";
-    const pdfUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + pdfFile;
 
-    // DOM elements
     const viewBtn = document.getElementById("viewBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
+
     const pdfModal = document.getElementById("pdfModal");
+
     const closeBtn = document.getElementById("closeBtn");
-    const pdfFrame = document.getElementById("pdfFrame");
-    const viewerSelect = document.getElementById("viewerSelect");
-    const pdfError = document.getElementById("pdfError");
-    const pdfLoading = document.getElementById("pdfLoading");
-    const retryBtn = document.getElementById("retryBtn");
 
-    // Set download link
-    downloadBtn.href = pdfFile;
-    downloadBtn.setAttribute("download", "");
 
-    // Build viewer URL based on selected option
-    function getViewerUrl(option) {
-      const encodedUrl = encodeURIComponent(pdfUrl);
-      switch(option) {
-        case 'google':
-          return `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
-          return pdfUrl;
-        case 'raw':
-          return pdfUrl;
-        default:
-          return `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
-      }
-    }
+    // OPEN PDF
 
-    // Show/hide loading and error states
-    function setLoading(show) {
-      pdfLoading.style.display = show ? 'flex' : 'none';
-    }
+    viewBtn.addEventListener("click", () => {
 
-    function setError(show) {
-      pdfError.classList.toggle('show', show);
-    }
-
-    // Load the PDF
-    function loadPdf() {
-      const option = viewerSelect.value;
-      const viewerUrl = getViewerUrl(option);
-      
-      setLoading(true);
-      setError(false);
-      
-      pdfFrame.src = viewerUrl;
-    }
-
-    // Open modal
-    function openModal() {
       pdfModal.classList.remove("hidden");
+
       document.body.style.overflow = "hidden";
-      
-      // Load the PDF
-      setTimeout(loadPdf, 300);
-    }
 
-    // Close modal
-    function closeModal() {
+    });
+
+
+    // CLOSE PDF
+
+    closeBtn.addEventListener("click", () => {
+
       pdfModal.classList.add("hidden");
-      pdfFrame.src = "";
+
       document.body.style.overflow = "";
-      setLoading(false);
-      setError(false);
-    }
 
-    // Handle iframe load error
-    pdfFrame.addEventListener('error', function() {
-      setLoading(false);
-      setError(true);
     });
 
-    // Try to detect if PDF loaded successfully
-    pdfFrame.addEventListener('load', function() {
-      setLoading(false);
-      // For Google Docs viewer, if it fails it shows an error page
-      // We'll check after a delay if it loaded
-      setTimeout(() => {
-        try {
-          // If it's Google Docs and it loaded properly, the iframe content will be accessible
-          // If not, it might throw a cross-origin error
-          if (viewerSelect.value === 'google') {
-            // Google Docs loads successfully if we can access the frame
-            // If we can't access it (cross-origin), it means the viewer loaded but can't be accessed
-            // which is actually fine - the content is visible
-            setError(false);
-          }
-        } catch(e) {
-          // Cross-origin means the viewer loaded successfully (it's from a different domain)
-          setError(false);
-        }
-      }, 3000);
-    });
 
-    // Handle iframe load failure with timeout
-    let loadTimeout;
-    pdfFrame.addEventListener('loadstart', function() {
-      clearTimeout(loadTimeout);
-      loadTimeout = setTimeout(() => {
-        setLoading(false);
-        // Check if we can detect content
-        try {
-          const doc = pdfFrame.contentDocument || pdfFrame.contentWindow.document;
-          if (doc && doc.body && doc.body.innerHTML && doc.body.innerHTML.length > 100) {
-            setError(false);
-          } else {
-            setError(true);
-          }
-        } catch(e) {
-          // Cross-origin means content loaded
-          setError(false);
-        }
-      }, 8000);
-    });
+    // CLOSE WHEN CLICKING OUTSIDE PDF
 
-    // View button
-    viewBtn.addEventListener("click", openModal);
+    pdfModal.addEventListener("click", (event) => {
 
-    // Close button
-    closeBtn.addEventListener("click", closeModal);
+      if (event.target === pdfModal) {
 
-    // Close on backdrop click
-    pdfModal.addEventListener("click", (e) => {
-      if (e.target === pdfModal) {
-        closeModal();
+        pdfModal.classList.add("hidden");
+
+        document.body.style.overflow = "";
+
       }
+
     });
 
-    // Retry button
-    retryBtn.addEventListener("click", loadPdf);
 
-    // Viewer selection change
-    viewerSelect.addEventListener("change", function() {
-      if (!pdfModal.classList.contains("hidden")) {
-        loadPdf();
+    // CLOSE WITH ESCAPE KEY
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+
+        pdfModal.classList.add("hidden");
+
+        document.body.style.overflow = "";
+
       }
+
     });
-
-    // Keyboard shortcuts
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !pdfModal.classList.contains("hidden")) {
-        closeModal();
-      }
-    });
-
-    // Check if PDF exists
-    async function checkPdfExists() {
-      try {
-        const response = await fetch(pdfUrl, { method: 'HEAD' });
-        if (!response.ok) {
-          console.warn('PDF file may not exist at:', pdfUrl);
-        }
-      } catch(e) {
-        console.warn('Could not verify PDF existence:', e);
-      }
-    }
-    checkPdfExists();
 
   </script>
 
