@@ -6,518 +6,460 @@
 
   <title>Kshirabdija Sahoo — Portfolio</title>
 
-  <!-- TAILWIND -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- PIXELIFY SANS -->
+  <!-- Pixelify Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link
     href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&display=swap"
     rel="stylesheet"
   />
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
       overflow-x: hidden;
+      background: #e5e5e5;
+    }
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+    }
+
+    /* =========================
+       LEFT SIDE
+    ========================= */
+
+    .left {
+      width: 50%;
+      height: 100vh;
+      min-height: 700px;
+      background: #e5e5e5;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hello {
+      position: relative;
+      z-index: 20;
+
+      margin: 10px 0 0 20px;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 6vw;
+      font-weight: 900;
+      line-height: 0.9;
+
+      color: black;
+      white-space: nowrap;
+    }
+
+    .portfolio-image {
+      position: absolute;
+
+      z-index: 10;
+
+      width: 108%;
+      max-width: none;
+
+      left: -2%;
+      bottom: 0;
+
+      object-fit: contain;
+      object-position: bottom left;
+    }
+
+
+    /* =========================
+       RIGHT SIDE
+    ========================= */
+
+    .right {
+      width: 50%;
+      height: 100vh;
+      min-height: 700px;
+
+      background: #ea63f6;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* =========================
+       DOTS
+    ========================= */
+
+    .dots {
+      position: absolute;
+      inset: 0;
+
+      z-index: 1;
+
+      pointer-events: none;
+    }
+
+    .dot {
+      position: absolute;
+
+      width: 25px;
+      height: 25px;
+
+      background: black;
+      border-radius: 50%;
+    }
+
+    .dot-1 {
+      top: 40px;
+      left: 60px;
+    }
+
+    .dot-2 {
+      top: 40px;
+      right: 45px;
+    }
+
+    .dot-3 {
+      top: 90px;
+      right: 125px;
+    }
+
+    .dot-4 {
+      top: 42%;
+      right: 45px;
+    }
+
+    .dot-5 {
+      bottom: 80px;
+      right: 55px;
+    }
+
+    .dot-6 {
+      bottom: 35px;
+      left: 70px;
+    }
+
+
+    /* =========================
+       RIGHT CONTENT
+    ========================= */
+
+    .content {
+      position: relative;
+
+      z-index: 10;
+
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 60px 12%;
+    }
+
+    .awkward {
+      margin: 0 0 55px 0;
+
+      color: white;
+
+      font-family: "Pixelify Sans", sans-serif;
+
+      font-size: 36px;
+      font-weight: 700;
+
+      line-height: 1.25;
+    }
+
+    .body-text {
+      color: black;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      font-size: 28px;
+      line-height: 1.45;
+
+      max-width: 600px;
+    }
+
+    .body-text p {
+      margin: 0;
+    }
+
+    .body-text p + p {
+      margin-top: 55px;
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 35px;
+
+      margin-top: 55px;
     }
 
     .btn-pixel {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 18px 45px;
+
+      background: #d9d9d9;
+
+      color: black;
+
+      text-decoration: none;
+
+      font-family: "Pixelify Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+
       border: 4px solid black;
-      box-shadow: 4px 4px 0px black;
+
+      box-shadow: 5px 5px 0 black;
+
       transition: all 0.15s ease;
     }
 
     .btn-pixel:hover {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0px black;
+      box-shadow: 3px 3px 0 black;
     }
 
     .btn-pixel:active {
-      transform: translate(4px, 4px);
-      box-shadow: 0px 0px 0px black;
+      transform: translate(5px, 5px);
+      box-shadow: none;
     }
 
-    /* PDF MODAL */
-    #pdfModal {
-      backdrop-filter: blur(4px);
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 767px) {
+
+      .page {
+        flex-direction: column;
+      }
+
+      .left {
+        width: 100%;
+        height: auto;
+        min-height: 72vh;
+
+        padding-top: 10px;
+      }
+
+      .hello {
+        margin-left: 15px;
+        margin-top: 10px;
+
+        font-size: 13vw;
+
+        line-height: 0.9;
+      }
+
+      .portfolio-image {
+        position: relative;
+
+        width: 112%;
+
+        left: -4%;
+
+        bottom: auto;
+
+        margin-top: 35px;
+        margin-bottom: -5px;
+      }
+
+      .right {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+
+        overflow: hidden;
+      }
+
+      .content {
+        height: auto;
+
+        justify-content: flex-start;
+
+        padding: 55px 40px 70px;
+      }
+
+      .awkward {
+        font-size: 30px;
+
+        margin-bottom: 60px;
+
+        line-height: 1.2;
+      }
+
+      .body-text {
+        font-size: 26px;
+
+        line-height: 1.45;
+
+        max-width: 100%;
+      }
+
+      .body-text p + p {
+        margin-top: 55px;
+      }
+
+      .buttons {
+        margin-top: 55px;
+
+        gap: 25px;
+      }
+
+      .btn-pixel {
+        font-size: 20px;
+
+        padding: 15px 30px;
+      }
+
+      /* Keep dots away from text on mobile */
+      .dots {
+        display: none;
+      }
     }
+
   </style>
 </head>
 
 
-<body class="bg-[#e5e5e5]">
+<body>
 
-  <!-- ========================================= -->
-  <!-- MAIN PAGE -->
-  <!-- ========================================= -->
+  <main class="page">
 
-  <div class="w-screen min-h-screen flex flex-col md:flex-row overflow-hidden">
+    <!-- =========================
+         LEFT
+    ========================== -->
 
+    <section class="left">
 
-    <!-- ========================================= -->
-    <!-- LEFT SIDE -->
-    <!-- ========================================= -->
-
-    <div
-      class="
-        w-full
-        md:w-1/2
-        bg-[#e5e5e5]
-        relative
-        overflow-hidden
-        flex
-        flex-col
-        items-center
-        min-h-[72vh]
-        md:min-h-screen
-        pt-6
-        md:pt-4
-        px-4
-        md:px-0
-      "
-    >
-
-      <!-- TITLE -->
-
-      <h1
-        class="
-          relative
-          z-30
-          text-[13vw]
-          md:text-[6vw]
-          font-black
-          leading-none
-          self-start
-          ml-2
-          md:ml-8
-          mt-2
-          md:mt-5
-        "
-      >
+      <h1 class="hello">
         print("hello")
       </h1>
 
-
-      <!-- IMAGE -->
-
       <img
-  src="Frame 193.png"
-  alt="Kshirabdija Sahoo portfolio"
-  class="
-    relative
-    md:absolute
-    md:bottom-0
-    md:left-[-2%]
-    z-10
-    w-[112%]
-    md:w-[108%]
-    max-w-none
-    object-contain
-    mt-6
-    md:mt-0
-    mr-2
-    md:mr-10
-  "
-/>
+        src="Frame 193.png"
+        alt="Kshirabdija Sahoo portfolio"
+        class="portfolio-image"
+      />
+
+    </section>
 
 
+    <!-- =========================
+         RIGHT
+    ========================== -->
 
-    <!-- ========================================= -->
-    <!-- RIGHT SIDE -->
-    <!-- ========================================= -->
+    <section class="right">
 
-    <div
-      class="
-        w-full
-        md:w-1/2
-        bg-[#ea63f6]
-        relative
-        overflow-hidden
-        min-h-[45vh]
-        md:min-h-screen
-      "
-    >
+      <!-- Decorative dots -->
+      <div class="dots">
 
+        <div class="dot dot-1"></div>
 
-      <!-- ========================================= -->
-      <!-- DECORATIVE DOTS -->
-      <!-- ========================================= -->
+        <div class="dot dot-2"></div>
 
-      <div class="absolute inset-0 z-0 hidden md:block">
+        <div class="dot dot-3"></div>
 
-        <div
-          class="
-            absolute
-            top-8
-            left-10
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
+        <div class="dot dot-4"></div>
 
-        <div
-          class="
-            absolute
-            top-16
-            right-24
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
+        <div class="dot dot-5"></div>
 
-        <div
-          class="
-            absolute
-            top-8
-            right-8
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
-
-        <div
-          class="
-            absolute
-            top-64
-            right-10
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
-
-        <div
-          class="
-            absolute
-            bottom-52
-            right-12
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
-
-        <div
-          class="
-            absolute
-            bottom-24
-            right-20
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
-
-        <div
-          class="
-            absolute
-            bottom-10
-            left-20
-            w-5
-            h-5
-            bg-black
-            rounded-full
-          "
-        ></div>
+        <div class="dot dot-6"></div>
 
       </div>
 
 
+      <!-- Content -->
+      <div class="content">
 
-      <!-- ========================================= -->
-      <!-- CONTENT -->
-      <!-- ========================================= -->
-
-      <div
-        class="
-          relative
-          z-20
-          h-full
-          flex
-          flex-col
-          justify-center
-          px-8
-          md:px-20
-          py-16
-          md:py-0
-        "
-      >
-
-
-        <!-- PIXELIFY HEADING -->
-
-        <h2
-          class="
-            text-white
-            text-2xl
-            md:text-4xl
-            mb-8
-            md:mb-12
-            font-bold
-          "
-          style="font-family: 'Pixelify Sans', sans-serif;"
-        >
+        <h2 class="awkward">
           Erm so this is awkward
         </h2>
 
 
-
-        <!-- DESCRIPTION -->
-
-        <div
-          class="
-            text-black
-            text-[1.3rem]
-            md:text-[1.8rem]
-            leading-snug
-            max-w-3xl
-          "
-        >
+        <div class="body-text">
 
           <p>
             This website is currently under construction
             (good things take a second).
           </p>
 
-
-          <p class="mt-8 md:mt-12">
+          <p>
             Until then, here’s a PDF version of my portfolio
             filled with projects, experiments, research,
             and visual explorations.
           </p>
 
-
-          <p class="mt-8 md:mt-12">
+          <p>
             Full website coming soon :)
           </p>
 
         </div>
 
 
-
-        <!-- ========================================= -->
-        <!-- BUTTONS -->
-        <!-- ========================================= -->
-
-        <div
-          class="
-            flex
-            flex-wrap
-            gap-6
-            md:gap-10
-            mt-10
-            md:mt-14
-          "
-        >
-
-
-          <!-- VIEW BUTTON -->
+        <!-- Buttons -->
+        <div class="buttons">
 
           <a
-  href="kshirabdija_portfolio%20%281%29-compressed.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="
-    btn-pixel
-    bg-[#d9d9d9]
-    px-8
-    md:px-12
-    py-4
-    md:py-5
-    text-black
-    text-lg
-    md:text-2xl
-    font-bold
-    inline-flex
-    items-center
-    justify-center
-  "
-  style="font-family: 'Pixelify Sans', sans-serif;"
->
-  VIEW
-</a>
+            href="kshirabdija_portfolio%20%281%29-compressed.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-pixel"
+          >
+            VIEW
+          </a>
 
-
-
-          <!-- DOWNLOAD BUTTON -->
 
           <a
-  href="kshirabdija_portfolio%20%281%29-compressed.pdf"
-  download
-  class="
-    btn-pixel
-    bg-[#d9d9d9]
-    px-8
-    md:px-12
-    py-4
-    md:py-5
-    text-black
-    text-lg
-    md:text-2xl
-    font-bold
-    inline-flex
-    items-center
-    justify-center
-  "
-  style="font-family: 'Pixelify Sans', sans-serif;"
->
-  DOWNLOAD
-</a>
+            href="kshirabdija_portfolio%20%281%29-compressed.pdf"
+            download
+            class="btn-pixel"
+          >
+            DOWNLOAD
+          </a>
 
         </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </div>
-
-
-
-  <!-- ========================================= -->
-  <!-- PDF VIEWER POPUP -->
-  <!-- ========================================= -->
-
-  <div
-    id="pdfModal"
-    class="
-      hidden
-      fixed
-      inset-0
-      bg-black/70
-      z-50
-      flex
-      items-center
-      justify-center
-      p-4
-    "
-  >
-
-    <div
-      class="
-        bg-white
-        w-full
-        md:w-[90%]
-        h-[90%]
-        relative
-        overflow-hidden
-        shadow-2xl
-      "
-    >
-
-
-      <!-- CLOSE BUTTON -->
-
-      <button
-        id="closeBtn"
-        class="
-          absolute
-          top-3
-          right-3
-          bg-black
-          text-white
-          px-5
-          py-2
-          z-50
-        "
-        style="font-family: 'Pixelify Sans', sans-serif;"
-      >
-        CLOSE
-      </button>
-
-
-
-      <!-- PDF -->
-
-      <iframe
-        src="kshirabdija_portfolio%20%281%29-compressed.pdf"
-        title="Kshirabdija Sahoo Portfolio"
-        class="w-full h-full"
-      ></iframe>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- ========================================= -->
-  <!-- JAVASCRIPT -->
-  <!-- ========================================= -->
-
-  <script>
-
-    const viewBtn = document.getElementById("viewBtn");
-
-    const pdfModal = document.getElementById("pdfModal");
-
-    const closeBtn = document.getElementById("closeBtn");
-
-
-    // OPEN PDF
-
-    viewBtn.addEventListener("click", () => {
-
-      pdfModal.classList.remove("hidden");
-
-      document.body.style.overflow = "hidden";
-
-    });
-
-
-    // CLOSE PDF
-
-    closeBtn.addEventListener("click", () => {
-
-      pdfModal.classList.add("hidden");
-
-      document.body.style.overflow = "";
-
-    });
-
-
-    // CLOSE WHEN CLICKING OUTSIDE PDF
-
-    pdfModal.addEventListener("click", (event) => {
-
-      if (event.target === pdfModal) {
-
-        pdfModal.classList.add("hidden");
-
-        document.body.style.overflow = "";
-
-      }
-
-    });
-
-
-    // CLOSE WITH ESCAPE KEY
-
-    document.addEventListener("keydown", (event) => {
-
-      if (event.key === "Escape") {
-
-        pdfModal.classList.add("hidden");
-
-        document.body.style.overflow = "";
-
-      }
-
-    });
-
-  </script>
+  </main>
 
 </body>
 </html>
