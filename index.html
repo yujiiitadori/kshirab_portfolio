@@ -180,7 +180,7 @@
 
   <script>
     // PDF file path
-    const pdfFile = "kshirabdija_portfolio(1)-compressed.pdf";
+    const pdfFile = "kshirabdija_portfolio (1)-compressed.pdf";
     const pdfUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + pdfFile;
 
     // DOM elements
@@ -204,9 +204,6 @@
       switch(option) {
         case 'google':
           return `https://docs.google.com/viewer?url=${encodedUrl}&embedded=true`;
-        case 'mozilla':
-          return `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodedUrl}`;
-        case 'native':
           return pdfUrl;
         case 'raw':
           return pdfUrl;
