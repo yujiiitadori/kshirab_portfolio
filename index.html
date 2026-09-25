@@ -135,12 +135,10 @@
     <div class="bg-white w-full h-full rounded-lg overflow-hidden relative flex flex-col">
       <!-- Toolbar -->
       <div class="pdf-toolbar flex-shrink-0">
-        <span class="font-semibold text-sm">📄 Portfolio Preview</span>
+        <span class="font-semibold text-sm">Portfolio Preview</span>
         <div class="viewer-options">
           <select id="viewerSelect" class="text-sm">
             <option value="google">Google Docs Viewer</option>
-            <option value="mozilla">Mozilla PDF.js</option>
-            <option value="native">Native PDF (Chrome/Edge)</option>
             <option value="raw">Raw PDF</option>
           </select>
           <button id="closeBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded font-bold text-sm transition">✕ CLOSE</button>
@@ -164,7 +162,7 @@
               <li>• Try a different <strong>viewer option</strong> from the dropdown</li>
             </ul>
             <button id="retryBtn" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-              🔄 Retry
+              Retry
             </button>
           </div>
         </div>
@@ -182,7 +180,7 @@
 
   <script>
     // PDF file path
-    const pdfFile = "kshirabdija_portfolio (1)-compressed.pdf";
+    const pdfFile = "kshirabdija_portfolio(1)-compressed.pdf";
     const pdfUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + pdfFile;
 
     // DOM elements
